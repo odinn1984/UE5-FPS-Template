@@ -38,11 +38,11 @@ APlayerCharacter::APlayerCharacter(const FObjectInitializer& ObjectInitializer) 
 			GetMesh()->SetRelativeLocation(FVector(0.0f, 0.0f, -90.0f));
 			GetMesh()->SetWorldScale3D(FVector(1.35f, 1.35f, 1.35f));
 
-			GetCameraComponent()->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, SocketToAttachCameraTo);
+			GetCameraComponent()->SetupAttachment(GetMesh(), SocketToAttachCameraTo);
 		}
 		else
 		{
-			GetCameraComponent()->AttachToComponent(GetCapsuleComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+			GetCameraComponent()->SetupAttachment(GetCapsuleComponent());
 		}
 
 		if (DefaultAnimationBP)
@@ -118,7 +118,15 @@ void APlayerCharacter::EquipWeapon(AWeapon* InWeapon)
 	
 	if (GetWeapon()->GetMesh() && GetMesh())
 	{
-		GetWeapon()->GetMesh()->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetIncludingScale, SocketToAttachWeaponTo);
+		FAttachmentTransformRules AttachmentRules(EAttachmentRule::SnapToTarget, true);
+
+		GetWeapon()->GetMesh()->AttachToComponent(
+			GetMesh(), 
+			AttachmentRules,
+			SocketToAttachWeaponTo
+		);
+
+		GetWeapon()->SetActorRelativeRotation(FRotator(10.0f, 70.0f, 10.0f));
 	}
 
 	GetWeapon()->SetOwner(this);

@@ -26,7 +26,7 @@ ASceneItem::ASceneItem(const FObjectInitializer& ObjectInitializer) : Super(Obje
 
 	if (GetMesh())
 	{
-		GetMesh()->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		GetMesh()->SetupAttachment(GetRootComponent());
 		GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 		GetMesh()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
 	}

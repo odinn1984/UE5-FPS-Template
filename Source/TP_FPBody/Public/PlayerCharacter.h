@@ -21,7 +21,7 @@ public:
 	FName SocketToAttachCameraTo = FName("head");
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon")
-  FName SocketToAttachWeaponTo = FName("weapon");
+  FName SocketToAttachWeaponTo = FName("hand_r");
 
   FORCEINLINE AWeapon* GetWeapon() const { return Weapon; }
   FORCEINLINE UCameraComponent* GetCameraComponent() const { return FPCameraComponent; }

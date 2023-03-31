@@ -31,7 +31,7 @@ AProjectile::AProjectile()
 
   if (GetMesh())
   {
-    GetMesh()->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+    GetMesh()->SetupAttachment(GetRootComponent());
     GetMesh()->SetWorldScale3D(FVector(0.125f, 0.125f, 0.125f));
 
     UStaticMesh* DefaultMesh = LoadObject<UStaticMesh>(nullptr, TEXT("/Script/Engine.StaticMesh'/Game/FPWeapon/Mesh/FirstPersonProjectileMesh.FirstPersonProjectileMesh'"));
